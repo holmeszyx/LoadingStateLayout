@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <declare-styleable name="LoadingState">
+        <attr name="EmptyText" format="reference"/>
+        <attr name="EmptyIcon" format="reference"/>
+        <attr name="ErrorText" format="reference"/>
+        <attr name="ErrorIcon" format="reference"/>
+    </declare-styleable>
+    
+</resources>
