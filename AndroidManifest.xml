@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="z.hol.loadingstate.test.SimpleLayoutActivity"></activity>
     </application>
 
 </manifest>

@@ -169,9 +169,11 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
                 params.addRule(CENTER_IN_PARENT, TRUE);
             }
             addView(v, params);
-            v.setFocusable(true);
-            v.setClickable(true);
-            v.setOnClickListener(mStateViewClickListener);
+            if (id != ID_LOADING){
+                v.setFocusable(true);
+                v.setClickable(true);
+                v.setOnClickListener(mStateViewClickListener);
+            }
             return true;
         }
         return false;

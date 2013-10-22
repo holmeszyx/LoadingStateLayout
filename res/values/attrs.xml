@@ -6,6 +6,7 @@
         <attr name="EmptyIcon" format="reference"/>
         <attr name="ErrorText" format="reference"/>
         <attr name="ErrorIcon" format="reference"/>
+        <attr name="DataView" format="reference"/>
     </declare-styleable>
     
 </resources>

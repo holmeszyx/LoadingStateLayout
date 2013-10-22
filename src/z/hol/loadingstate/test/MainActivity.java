@@ -3,19 +3,20 @@ package z.hol.loadingstate.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import z.hol.loadingstate.R;
 import z.hol.loadingstate.LoadingStateLayout.ReloadingListener;
+import z.hol.loadingstate.R;
 import z.hol.loadingstate.view.ListViewWithLoadingState;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 
 public class MainActivity extends Activity implements OnItemClickListener, ReloadingListener{
     
@@ -60,6 +61,9 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
         }else if (position == 5){
             mAdapter.clear();
             loading();
+        }else if (position == 6){
+            Intent i = new Intent(this, SimpleLayoutActivity.class);
+            startActivity(i);
         }
     }
 
@@ -98,7 +102,20 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
             List<String> result = new ArrayList<String>();
             SystemClock.sleep(3500);
             for (int i = 0; i < 35; i ++){
-                result.add("Item " + i);
+                String item;
+                if (i == 3){
+                    item = "Empty list";
+                }else if (i == 4){
+                    item = "Error list";
+                }else if (i == 5){
+                    item = "Reload list";
+                } else if (i== 6){
+                    item = "Set data from xml";
+                }
+                else{
+                    item = "Item " + i;
+                }
+                result.add(item);
             }
             return result;
         }
