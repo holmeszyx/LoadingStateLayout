@@ -41,6 +41,13 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
         mDataView.setAdapter(adapter);
     }
     
+    public boolean isDataEmpty(){
+        if (mAdapter != null){
+            return mAdapter.isEmpty();
+        }
+        return true;
+    }
+    
     private class EmptyDataObserver extends DataSetObserver{
 
         @Override
