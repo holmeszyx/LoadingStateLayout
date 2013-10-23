@@ -1,4 +1,4 @@
-package z.hol.loadingstate.test;
+package z.hol.loadingstate.sample;
 
 import z.hol.loadingstate.R;
 import z.hol.loadingstate.view.SimpleViewWithLoadingState;
@@ -19,7 +19,7 @@ public class SimpleLayoutActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_simple_view);
+        setContentView(R.layout.ls__test_layout_simple_view);
         mLoadingState = (SimpleViewWithLoadingState) findViewById(R.id.loading);
         mLoadingTask = new LoadingTask();
         mLoadingTask.execute();

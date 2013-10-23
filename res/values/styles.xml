@@ -7,7 +7,7 @@
 
     <style name="Loading.Text" parent="@android:style/Widget.TextView">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#FF777777</item>
+        <item name="android:textColor">#FFF0F0F0</item>
     </style>
 
 </resources>

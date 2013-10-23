@@ -5,10 +5,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="5dp"
-    android:background="#FFE3E3E3"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:clickable="true"
+    android:background="@drawable/ls__bg_state_view"
      >
     
     <ImageView  android:id="@android:id/icon"
@@ -22,7 +19,7 @@
         style="@style/Loading.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loading_empty"
+        android:text="@string/loading_error"
         />
 
 </LinearLayout>

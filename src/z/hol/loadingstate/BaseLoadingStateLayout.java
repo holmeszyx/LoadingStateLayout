@@ -39,9 +39,9 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         T data = initDataView(inflater, attrs);
-        View loading = inflater.inflate(R.layout.inc_loading, null);
-        View empty = inflater.inflate(R.layout.inc_empty, null);
-        View error = inflater.inflate(R.layout.inc_error, null);
+        View loading = inflater.inflate(R.layout.ls__inc_loading, null);
+        View empty = inflater.inflate(R.layout.ls__inc_empty, null);
+        View error = inflater.inflate(R.layout.ls__inc_error, null);
         
         TypedArray a = getResources().obtainAttributes(attrs, R.styleable.LoadingState);
         int emptyIcon, errorIcon;

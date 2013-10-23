@@ -8,7 +8,7 @@
     <z.hol.loadingstate.view.SimpleViewWithLoadingState android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        my:DataView="@layout/inc_data_view"
+        my:DataView="@layout/ls__inc_data_view"
         >
         
     </z.hol.loadingstate.view.SimpleViewWithLoadingState>

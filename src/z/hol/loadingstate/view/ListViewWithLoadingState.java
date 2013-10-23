@@ -30,7 +30,7 @@ public class ListViewWithLoadingState extends AdapterViewWithLoadingState<ListVi
     protected ListView initDataView(LayoutInflater inflater, AttributeSet attrs) {
         // TODO Auto-generated method stub
         //return super.initDataView(inflater, attrs);
-        View listParent = inflater.inflate(R.layout.inc_listview, null);
+        View listParent = inflater.inflate(R.layout.ls__inc_listview, null);
         ListView listView = (ListView) listParent.findViewById(android.R.id.list);
         return listView;
     }

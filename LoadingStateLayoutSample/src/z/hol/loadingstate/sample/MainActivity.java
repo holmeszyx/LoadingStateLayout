@@ -1,4 +1,4 @@
-package z.hol.loadingstate.test;
+package z.hol.loadingstate.sample;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_main);
+        setContentView(R.layout.ls__test_layout_main);
         mListView = (ListViewWithLoadingState) findViewById(android.R.id.list);
         mListView.getDataView().setOnItemClickListener(this);
         mListView.setReloadingListener(this);
@@ -127,7 +127,7 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
             mListView.stopLoading();
             if (result != null){
                 if (mAdapter == null){
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_text, result);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.ls_test_item_text, result);
                     mListView.setAdapter(adapter);
                     mAdapter = adapter;
                 }else{
