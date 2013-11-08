@@ -68,6 +68,11 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
         public void onInvalidated() {
             // TODO Auto-generated method stub
             super.onInvalidated();
+            if (mAdapter == null || mAdapter.isEmpty()){
+                empty();
+            }else{
+                hideEmpty();
+            }
         }
     }
 }
