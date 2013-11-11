@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 
 public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoadingStateLayout<T>{
     
@@ -41,7 +44,13 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
                 empty();
             }
         }
-        mDataView.setAdapter(adapter);
+        if (mDataView instanceof ListView){
+            ((ListView) mDataView).setAdapter(adapter);
+        }else if (mDataView instanceof GridView){
+            ((GridView) mDataView).setAdapter(adapter);
+        }else{
+            ((AdapterView<ListAdapter>)mDataView).setAdapter(adapter);
+        }
     }
     
     public boolean isDataEmpty(){
