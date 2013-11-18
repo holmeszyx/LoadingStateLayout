@@ -11,6 +11,7 @@
     <ProgressBar android:id="@android:id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateDuration="1000"
         />
 
     <TextView android:id="@android:id/text1"

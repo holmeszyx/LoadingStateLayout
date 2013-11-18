@@ -52,22 +52,22 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public LoadingStateLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         // TODO Auto-generated constructor stub
-        init(context, attrs);
+        init(context, attrs, defStyle);
     }
 
     public LoadingStateLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         // TODO Auto-generated constructor stub
-        init(context, attrs);
+        init(context, attrs, R.attr.loadingStateStyle);
     }
 
     public LoadingStateLayout(Context context) {
         super(context);
         // TODO Auto-generated constructor stub
-        init(context, null);
+        init(context, null, R.attr.loadingStateStyle);
     }
 
-    protected abstract void init(Context context, AttributeSet attrs);
+    protected abstract void init(Context context, AttributeSet attrs, int defStyle);
     
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

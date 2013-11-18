@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T>{
@@ -35,7 +36,7 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
     }
 
     @Override
-    protected void init(Context context, AttributeSet attrs) {
+    protected void init(Context context, AttributeSet attrs, int defStyle) {
         // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         T data = initDataView(inflater, attrs);
@@ -43,13 +44,17 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         View empty = inflater.inflate(R.layout.ls__inc_empty, null);
         View error = inflater.inflate(R.layout.ls__inc_error, null);
         
-        TypedArray a = getResources().obtainAttributes(attrs, R.styleable.LoadingState);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingState, defStyle, 0);
         int emptyIcon, errorIcon;
+        int progressCycleIcon;
+        //int loadingProgressDuration = 0;
         try{
             emptyIcon = a.getResourceId(R.styleable.LoadingState_EmptyIcon, 0);
             errorIcon = a.getResourceId(R.styleable.LoadingState_ErrorIcon, 0);
             mEmptyText = a.getText(R.styleable.LoadingState_EmptyText);
             mErrorText = a.getText(R.styleable.LoadingState_ErrorText);
+            progressCycleIcon = a.getResourceId(R.styleable.LoadingState_LoadingProgress, 0);
+            //loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, 0);
         }finally{
             a.recycle();
         }
@@ -58,6 +63,11 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         setLoadingView(loading);
         setEmptyView(empty);
         setErrorView(error);
+        
+        if (progressCycleIcon != 0){
+            ProgressBar progress = (ProgressBar) loading.findViewById(android.R.id.progress);
+            progress.setIndeterminateDrawable(getResources().getDrawable(progressCycleIcon));
+        }
         
         if (emptyIcon != 0){
             mEmptyImageView.setImageResource(emptyIcon);

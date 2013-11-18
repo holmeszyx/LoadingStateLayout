@@ -6,7 +6,13 @@
         <attr name="EmptyIcon" format="reference"/>
         <attr name="ErrorText" format="reference"/>
         <attr name="ErrorIcon" format="reference"/>
+        <attr name="LoadingProgress" format="reference"/>
+        <attr name="LoadingProgressDuration" format="integer"/>
         <attr name="DataView" format="reference"/>
+    </declare-styleable>
+    
+    <declare-styleable name="LoadingStateTheme">
+        <attr name="loadingStateStyle" format="reference"/>
     </declare-styleable>
     
 </resources>
