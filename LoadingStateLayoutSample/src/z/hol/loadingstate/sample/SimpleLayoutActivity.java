@@ -1,6 +1,5 @@
 package z.hol.loadingstate.sample;
 
-import z.hol.loadingstate.R;
 import z.hol.loadingstate.view.SimpleViewWithLoadingState;
 import android.app.Activity;
 import android.os.AsyncTask;

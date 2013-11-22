@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import z.hol.loadingstate.LoadingStateLayout.ReloadingListener;
-import z.hol.loadingstate.R;
 import z.hol.loadingstate.view.ListViewWithLoadingState;
 import android.app.Activity;
 import android.content.Intent;
