@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,13 +29,6 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
         mListView.getDataView().setOnItemClickListener(this);
         mListView.setReloadingListener(this);
         loading();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
     
     @Override
