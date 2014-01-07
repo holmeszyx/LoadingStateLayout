@@ -55,6 +55,9 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
         }else if (position == 6){
             Intent i = new Intent(this, SimpleLayoutActivity.class);
             startActivity(i);
+        }else if (position == 7){
+            Intent i = new Intent(this, SimpleLayoutWithChildActivity.class);
+            startActivity(i);
         }
     }
 
@@ -102,8 +105,9 @@ public class MainActivity extends Activity implements OnItemClickListener, Reloa
                     item = "Reload list";
                 } else if (i== 6){
                     item = "Set data from xml";
-                }
-                else{
+                } else if (i == 7){
+                    item = "Set data from xml with child";
+                } else{
                     item = "Item " + i;
                 }
                 result.add(item);

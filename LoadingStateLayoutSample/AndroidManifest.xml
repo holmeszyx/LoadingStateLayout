@@ -21,6 +21,7 @@
         </activity>
         
         <activity android:name=".SimpleLayoutActivity"></activity>
+        <activity android:name=".SimpleLayoutWithChildActivity"></activity>
     </application>
 
 </manifest>

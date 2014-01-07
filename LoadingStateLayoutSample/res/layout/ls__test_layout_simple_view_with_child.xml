@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     >
+    
+    <z.hol.loadingstate.view.SimpleViewWithLoadingState android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        my:DataView="@layout/ls__inc_data_view"
+        >
+        
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:tag="abc"
+            >
+            
+            <TextView android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Good for you"
+                />
+            
+        </LinearLayout>
+        
+    </z.hol.loadingstate.view.SimpleViewWithLoadingState>
+
+</LinearLayout>
