@@ -9,6 +9,13 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+/**
+ * A loading state layout which has a AdapterView (e.g. ListView , GridView) as child.
+ * When Adapter set with setAdapter(), empty state view can auto show or hide with adapter data set
+ * @author holmes
+ *
+ * @param <T>
+ */
 public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoadingStateLayout<T>{
     
     private ListAdapter mAdapter;
@@ -60,6 +67,11 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
         return true;
     }
     
+    /**
+     * The observer for empty adapter
+     * @author holmes
+     *
+     */
     private class EmptyDataObserver extends DataSetObserver{
 
         @Override

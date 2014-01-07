@@ -8,6 +8,11 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
+/**
+ * Loading State view can set any child view in xml
+ * @author holmes
+ *
+ */
 public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
 
     public SimpleViewWithLoadingState(Context context, AttributeSet attrs,
@@ -30,6 +35,14 @@ public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
     protected View initDataView(LayoutInflater inflater, AttributeSet attrs) {
         // TODO Auto-generated method stub
         //return super.initDataView(inflater, attrs);
+        if (getChildCount() > 0){
+            // there are views found in xml,
+            // use the first view for dataView;
+            View firstView = getChildAt(0);
+            removeAllViews();
+            return firstView;
+        }
+
         TypedArray a = getResources().obtainAttributes(attrs, R.styleable.LoadingState);
         int dataViewRes = 0;
         try{
@@ -42,5 +55,32 @@ public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
             dataview = inflater.inflate(dataViewRes, null);
         }
         return dataview;
+    }
+    
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        // TODO Auto-generated method stub
+        super.onLayout(changed, l, t, r, b);
+        int viewCount = getChildCount();
+        if (viewCount > 1){
+            boolean hasFirstChild = false;
+            for (int i = 0; i < viewCount; i ++){
+                View cv = getChildAt(i);
+                if (cv == null) continue;
+                //System.out.println("tag is " + cv.getTag());
+                int id = cv.getId();
+                if (id == ID_DATA||
+                        id == ID_EMPTY ||
+                        id == ID_ERROR ||
+                        id == ID_LOADING){
+                    continue;
+                }else{
+                    removeView(cv);
+                    if (!hasFirstChild){
+                        setDataView(cv);
+                    }
+                }
+            }
+        }
     }
 }

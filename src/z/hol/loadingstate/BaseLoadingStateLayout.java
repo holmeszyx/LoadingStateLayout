@@ -9,6 +9,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+/**
+ * A simple full loading state layout.
+ * There are empty view, loading view and error view in it.
+ * You can change state text or icon runtime, also can set it in XML
+ * @author holmes
+ *
+ * @param <T>
+ */
 public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T>{
 
     

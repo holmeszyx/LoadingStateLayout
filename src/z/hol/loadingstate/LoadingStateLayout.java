@@ -7,6 +7,12 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.RelativeLayout;
 
+/**
+ * The origin layout with the loading state
+ * @author holmes
+ *
+ * @param <T>
+ */
 public abstract class LoadingStateLayout <T extends View> extends RelativeLayout{
     public static final int ID_DATA = 0x7f1989;
     public static final int ID_EMPTY = 0x7f1990;
@@ -83,6 +89,10 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mReloadingListener = listener;
     }
     
+    /**
+     * remove a view from its parent
+     * @param v
+     */
     protected static void removeOldView(View v){
         if (v != null){
             v.setOnClickListener(null);
@@ -93,20 +103,36 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         }
     }
     
+    /**
+     * set data view
+     * @param dataView
+     */
     public void setDataView(T dataView){
+        int oldVisibility = mDataView == null ? -1 : mDataView.getVisibility();
         removeOldView(mDataView);
         mDataView = dataView;
         if (mDataView != null){
             mRelayout = true;
             mDataView.setId(ID_DATA);
+            if (oldVisibility != -1){
+                dataView.setVisibility(oldVisibility);
+            }
             setDataViewLayoutParams(mDataView);
         }
     }
     
+    /**
+     * get data view
+     * @return
+     */
     public T getDataView(){
         return mDataView;
     }
     
+    /**
+     * set loading state view
+     * @param v
+     */
     public void setLoadingView(View v){
         removeOldView(mLoadingView);
         mLoadingView = v;
@@ -117,10 +143,18 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         }
     }
     
+    /**
+     * Get loading view
+     * @return
+     */
     public View getLoadingView(){
         return mLoadingView;
     }
     
+    /**
+     * set error state view
+     * @param v
+     */
     public void setErrorView(View v){
         removeOldView(mErrorView);
         mErrorView = v;
@@ -131,10 +165,18 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         }
     }
     
+    /**
+     * get Error state view
+     * @return
+     */
     public View getErrorView(){
         return mErrorView;
     }
     
+    /**
+     * Set empty view
+     * @param v
+     */
     public void setEmptyView(View v){
         removeOldView(mEmptyView);
         mEmptyView = v;
@@ -145,10 +187,20 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         }
     }
     
+    /**
+     * Get empty view
+     * @return
+     */
     public View getEmptyView(){
         return mEmptyView;
     }
     
+    /**
+     * to set data view layout_params.
+     * default: match_parent
+     * @param v
+     * @return
+     */
     protected boolean setDataViewLayoutParams(T v){
         if (v != null){
             LayoutParams params = (LayoutParams) v.getLayoutParams();
@@ -161,6 +213,12 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         return false;
     }
     
+    /**
+     * Set state view layout_params, center in parent is default.
+     * @param v
+     * @param id
+     * @return
+     */
     protected boolean setViewLayoutParams(View v, int id){
         if (v != null){
             LayoutParams params = (LayoutParams) v.getLayoutParams();
@@ -185,23 +243,47 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         removeOldView(mLoadingView);
     }
     
+    /**
+     * Show loading state view 
+     */
     public void startLoading(){
         setState(State.LOADING);
         removeAllStateViews();
         setViewLayoutParams(mLoadingView, ID_LOADING);
     }
     
+    /**
+     * Hide loading view, and set State to State.NORMAL
+     * @see  #startLoading()
+     */
     public void stopLoading(){
         setState(State.NORMAL);
         removeOldView(mLoadingView);
     }
     
+    /**
+     * Show error state
+     * @see  #hideError()
+     * @see  #hideEmpty()
+     */
     public void error(){
         setState(State.ERROR);
         removeAllStateViews();
         setViewLayoutParams(mErrorView, ID_ERROR);
     }
     
+    /**
+     * Hide error state
+     */
+    public void hideError(){
+        setState(State.NORMAL);
+        removeAllStateViews();
+    }
+    
+    /**
+     * Show empty state view.
+     * @see  {@link #hideEmpty()}
+     */
     public void empty(){
         setState(State.EMPTY);
         removeAllStateViews();
@@ -209,23 +291,42 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mEmptyView.requestFocus();
     }
     
+    /**
+     * Hide the empty state view
+     */
     public void hideEmpty(){
         setState(State.NORMAL);
         removeAllStateViews();
     }
     
+    /**
+     * Is Error loading state
+     * @return
+     */
     public boolean isError(){
         return mState == State.ERROR;
     }
     
+    /**
+     * Is Data set empty
+     * @return
+     */
     public boolean isEmpty(){
         return mState == State.EMPTY;
     }
     
+    /**
+     * set current loading state
+     * @param state
+     */
     protected void setState(State state){
         mState = state;
     }
     
+    /**
+     * Get current loading state
+     * @return
+     */
     public State getState(){
         return mState;
     }

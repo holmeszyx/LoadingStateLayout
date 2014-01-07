@@ -2,6 +2,11 @@ package z.hol.loadingstate;
 
 import z.hol.loadingstate.LoadingStateLayout.ReloadingListener;
 
+/**
+ * Error and empty will use the same method onReloading
+ * @author holmes
+ *
+ */
 public abstract class SingleReloadingListener implements ReloadingListener{
 
     @Override

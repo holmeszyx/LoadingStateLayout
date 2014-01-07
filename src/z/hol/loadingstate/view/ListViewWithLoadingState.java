@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
+/**
+ * Loading state layout which has a ListView
+ * @author holmes
+ *
+ */
 public class ListViewWithLoadingState extends AdapterViewWithLoadingState<ListView>{
 
     public ListViewWithLoadingState(Context context, AttributeSet attrs,
