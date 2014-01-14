@@ -66,4 +66,34 @@ public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingSta
         }
         return (AbsListView) dataview;
     }
+    
+    @Override
+    protected void onFinishInflate() {
+        // TODO Auto-generated method stub
+        super.onFinishInflate();
+        int viewCount = getChildCount();
+        if (viewCount > 0){
+            boolean hasFirstChild = false;
+            for (int i = 0; i < viewCount; i ++){
+                View cv = getChildAt(i);
+                if (cv == null) continue;
+                //System.out.println("tag is " + cv.getTag());
+                int id = cv.getId();
+                if (id == ID_DATA||
+                        id == ID_EMPTY ||
+                        id == ID_ERROR ||
+                        id == ID_LOADING){
+                    continue;
+                }else{
+                    removeView(cv);
+                    if (!hasFirstChild){
+                        if (cv instanceof AbsListView){
+                            setDataView((AbsListView)cv);
+                            hasFirstChild = true;
+                        }
+                    }
+                }
+            }
+        }        
+    }    
 }

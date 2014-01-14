@@ -58,11 +58,11 @@ public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
     }
     
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    protected void onFinishInflate() {
         // TODO Auto-generated method stub
-        super.onLayout(changed, l, t, r, b);
+        super.onFinishInflate();
         int viewCount = getChildCount();
-        if (viewCount > 1){
+        if (viewCount > 0){
             boolean hasFirstChild = false;
             for (int i = 0; i < viewCount; i ++){
                 View cv = getChildAt(i);
@@ -78,9 +78,10 @@ public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
                     removeView(cv);
                     if (!hasFirstChild){
                         setDataView(cv);
+                        hasFirstChild = true;
                     }
                 }
             }
-        }
+        }        
     }
 }
