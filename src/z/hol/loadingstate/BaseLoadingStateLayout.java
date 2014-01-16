@@ -1,6 +1,7 @@
 package z.hol.loadingstate;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -55,14 +56,18 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingState, defStyle, 0);
         int emptyIcon, errorIcon;
         int progressCycleIcon;
-        //int loadingProgressDuration = 0;
+        int stateBackgroud = 0;
+        ColorStateList stateTextColor = null;
+        // int loadingProgressDuration = -1;
         try{
             emptyIcon = a.getResourceId(R.styleable.LoadingState_EmptyIcon, 0);
             errorIcon = a.getResourceId(R.styleable.LoadingState_ErrorIcon, 0);
             mEmptyText = a.getText(R.styleable.LoadingState_EmptyText);
             mErrorText = a.getText(R.styleable.LoadingState_ErrorText);
             progressCycleIcon = a.getResourceId(R.styleable.LoadingState_LoadingProgress, 0);
-            //loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, 0);
+            stateBackgroud = a.getResourceId(R.styleable.LoadingState_lsStateBackgroud, 0);
+            stateTextColor = a.getColorStateList(R.styleable.LoadingState_lsStateTextColor);
+            // loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, -1);
         }finally{
             a.recycle();
         }
@@ -75,6 +80,19 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         if (progressCycleIcon != 0){
             ProgressBar progress = (ProgressBar) loading.findViewById(android.R.id.progress);
             progress.setIndeterminateDrawable(getResources().getDrawable(progressCycleIcon));
+        }
+        
+        
+        if (stateBackgroud != 0){
+            loading.setBackgroundResource(stateBackgroud);
+            empty.setBackgroundResource(stateBackgroud);
+            error.setBackgroundResource(stateBackgroud);
+        }
+        
+        if (stateTextColor != null){
+            setTextViewTextColor(mLoadingTextView, stateTextColor);
+            setTextViewTextColor(mEmptyTextView, stateTextColor);
+            setTextViewTextColor(mErrorTextView, stateTextColor);
         }
         
         if (emptyIcon != 0){
@@ -136,6 +154,12 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
     private static void setTextViewText(TextView v, CharSequence text){
         if (v != null){
             v.setText(text);
+        }
+    }
+
+    private static void setTextViewTextColor(TextView v, ColorStateList color){
+        if (v != null){
+            v.setTextColor(color);
         }
     }
     
