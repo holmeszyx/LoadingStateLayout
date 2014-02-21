@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         int progressCycleIcon;
         int stateBackgroud = 0;
         ColorStateList stateTextColor = null;
+        float textSize = -1f;
         // int loadingProgressDuration = -1;
         try{
             emptyIcon = a.getResourceId(R.styleable.LoadingState_EmptyIcon, 0);
@@ -68,6 +70,7 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
             stateBackgroud = a.getResourceId(R.styleable.LoadingState_lsStateBackgroud, 0);
             stateTextColor = a.getColorStateList(R.styleable.LoadingState_lsStateTextColor);
             // loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, -1);
+            textSize = a.getDimension(R.styleable.LoadingState_lsStateTextSize, -1f);
         }finally{
             a.recycle();
         }
@@ -93,6 +96,12 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
             setTextViewTextColor(mLoadingTextView, stateTextColor);
             setTextViewTextColor(mEmptyTextView, stateTextColor);
             setTextViewTextColor(mErrorTextView, stateTextColor);
+        }
+        
+        if (textSize != -1f){
+            setTextViewTextSize(mLoadingTextView, textSize);
+            setTextViewTextSize(mEmptyTextView, textSize);
+            setTextViewTextSize(mErrorTextView, textSize);
         }
         
         if (emptyIcon != 0){
@@ -160,6 +169,17 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
     private static void setTextViewTextColor(TextView v, ColorStateList color){
         if (v != null){
             v.setTextColor(color);
+        }
+    }
+
+    /**
+     * Set Text Size for TextView
+     * @param v
+     * @param size
+     */
+    private static void setTextViewTextSize(TextView v, float size){
+        if (v != null){
+            v.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
         }
     }
     
