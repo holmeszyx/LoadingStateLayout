@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading_loading">Loading</string>
+    <string name="loading_empty">Empty</string>
+    <string name="loading_error">Error</string>
+    <string name="loading_error2">Error, click to retry</string>
+</resources>

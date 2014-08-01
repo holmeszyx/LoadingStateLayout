@@ -16,6 +16,12 @@ import android.widget.ListView;
  *
  */
 public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingState<AbsListView>{
+    
+    /** 
+     * can't get dataview in {@link #initDataView(LayoutInflater, AttributeSet)} method
+     *  
+     */
+    private boolean mIsNoDataViewInInit = false;
 
     public SimpleAdapterViewWithLoadingState(Context context, AttributeSet attrs,
             int defStyle) {
@@ -61,7 +67,11 @@ public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingSta
             if (isInEditMode()){
                 dataview = new ListView(getContext());
             }else{
-                throw new IllegalArgumentException("Data view is " + dataview);
+                // if set child in xml 
+                // dataview == null
+                // so not throw exception here
+                // throw new IllegalArgumentException("Data view is " + dataview);
+                mIsNoDataViewInInit = true;
             }
         }
         return (AbsListView) dataview;
@@ -90,10 +100,15 @@ public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingSta
                         if (cv instanceof AbsListView){
                             setDataView((AbsListView)cv);
                             hasFirstChild = true;
+                            mIsNoDataViewInInit = false;
                         }
                     }
                 }
             }
-        }        
+        }
+        
+        if (mIsNoDataViewInInit && !isInEditMode()){
+            throw new IllegalArgumentException("Data view is " + getDataView());
+        }
     }    
 }

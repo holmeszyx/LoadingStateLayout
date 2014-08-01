@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 /**
@@ -95,7 +96,9 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
      */
     protected static void removeOldView(View v){
         if (v != null){
-            v.setOnClickListener(null);
+            if (!(v instanceof AdapterView<?>)){
+                v.setOnClickListener(null);
+            }
             ViewParent parent = v.getParent();
             if (parent != null){
                 ((ViewGroup) parent).removeView(v);
