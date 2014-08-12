@@ -39,6 +39,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     private boolean mRelayout = true;
 
     private ReloadingListener mReloadingListener;
+    private OnStateChangeListener mStateChangedListener;
     
     private OnClickListener mStateViewClickListener = new OnClickListener() {
         
@@ -88,6 +89,14 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     
     public void setReloadingListener(ReloadingListener listener){
         mReloadingListener = listener;
+    }
+
+    /**
+     * Set OnStateChanged Listener
+     * @param listener
+     */
+    public void setOnStateChangedListener(OnStateChangeListener listener){
+        mStateChangedListener = listener;
     }
     
     /**
@@ -253,6 +262,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         setState(State.LOADING);
         removeAllStateViews();
         setViewLayoutParams(mLoadingView, ID_LOADING);
+        invokeOnStateChanged(State.LOADING);
     }
     
     /**
@@ -262,6 +272,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public void stopLoading(){
         setState(State.NORMAL);
         removeOldView(mLoadingView);
+        invokeOnStateChanged(State.NORMAL);
     }
     
     /**
@@ -273,6 +284,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         setState(State.ERROR);
         removeAllStateViews();
         setViewLayoutParams(mErrorView, ID_ERROR);
+        invokeOnStateChanged(State.ERROR);
     }
     
     /**
@@ -281,6 +293,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public void hideError(){
         setState(State.NORMAL);
         removeAllStateViews();
+        invokeOnStateChanged(State.NORMAL);
     }
     
     /**
@@ -292,6 +305,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         removeAllStateViews();
         setViewLayoutParams(mEmptyView, ID_EMPTY);
         mEmptyView.requestFocus();
+        invokeOnStateChanged(State.EMPTY);
     }
     
     /**
@@ -300,6 +314,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public void hideEmpty(){
         setState(State.NORMAL);
         removeAllStateViews();
+        invokeOnStateChanged(State.NORMAL);
     }
     
     /**
@@ -333,6 +348,17 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public State getState(){
         return mState;
     }
+
+    /**
+     * try to invoke onStateChanged Listener if it is no null.
+     * just for internal calls
+     * @param state
+     */
+    protected void invokeOnStateChanged(State state){
+        if (mStateChangedListener != null){
+            mStateChangedListener.onStateChanged(this, state);
+        }
+    }
     
     /**
      * The call back for empty view or error view clicked
@@ -350,6 +376,20 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
          * reloading on empty
          */
         public void onEmptyReloading();
+    }
+
+    /**
+     * State changed listener,
+     * for state, Loading, Error, Empty
+     */
+    public interface OnStateChangeListener{
+
+        /**
+         * State changed
+         * @param layout
+         * @param state current state
+         */
+        void onStateChanged(LoadingStateLayout<?> layout, State state);
     }
     
 }
