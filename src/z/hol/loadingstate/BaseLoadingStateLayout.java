@@ -50,31 +50,37 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         T data = initDataView(inflater, attrs);
-        View loading = inflater.inflate(R.layout.ls__inc_loading, null);
-        View empty = inflater.inflate(R.layout.ls__inc_empty, null);
-        View error = inflater.inflate(R.layout.ls__inc_error, null);
-        
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingState, defStyle, 0);
+        int loadingViewRes, emptyViewRes, errorViewRes;
         int emptyIcon, errorIcon;
         int progressCycleIcon;
-        int stateBackgroud = 0;
+        int stateBackground = 0;
         ColorStateList stateTextColor = null;
         float textSize = -1f;
         // int loadingProgressDuration = -1;
         try{
+            loadingViewRes = a.getResourceId(R.styleable.LoadingState_lsLoadingView, R.layout.ls__inc_loading);
+            emptyViewRes = a.getResourceId(R.styleable.LoadingState_lsEmptyView, R.layout.ls__inc_empty);
+            errorViewRes = a.getResourceId(R.styleable.LoadingState_lsErrorView, R.layout.ls__inc_error);
+
             emptyIcon = a.getResourceId(R.styleable.LoadingState_EmptyIcon, 0);
             errorIcon = a.getResourceId(R.styleable.LoadingState_ErrorIcon, 0);
             mEmptyText = a.getText(R.styleable.LoadingState_EmptyText);
             mErrorText = a.getText(R.styleable.LoadingState_ErrorText);
             progressCycleIcon = a.getResourceId(R.styleable.LoadingState_LoadingProgress, 0);
-            stateBackgroud = a.getResourceId(R.styleable.LoadingState_lsStateBackgroud, 0);
+            stateBackground = a.getResourceId(R.styleable.LoadingState_lsStateBackground, 0);
             stateTextColor = a.getColorStateList(R.styleable.LoadingState_lsStateTextColor);
             // loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, -1);
             textSize = a.getDimension(R.styleable.LoadingState_lsStateTextSize, -1f);
         }finally{
             a.recycle();
         }
-        
+
+        View loading = inflater.inflate(loadingViewRes, null);
+        View empty = inflater.inflate(emptyViewRes, null);
+        View error = inflater.inflate(errorViewRes, null);
+
         setDataView(data);
         setLoadingView(loading);
         setEmptyView(empty);
@@ -86,10 +92,10 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
         }
         
         
-        if (stateBackgroud != 0){
-            loading.setBackgroundResource(stateBackgroud);
-            empty.setBackgroundResource(stateBackgroud);
-            error.setBackgroundResource(stateBackgroud);
+        if (stateBackground != 0){
+            loading.setBackgroundResource(stateBackground);
+            empty.setBackgroundResource(stateBackground);
+            error.setBackgroundResource(stateBackground);
         }
         
         if (stateTextColor != null){

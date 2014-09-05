@@ -9,9 +9,12 @@
         <attr name="LoadingProgress" format="reference"/>
         <attr name="LoadingProgressDuration" format="integer"/>
         <attr name="DataView" format="reference"/>
-        <attr name="lsStateBackgroud" format="reference"/>
+        <attr name="lsStateBackground" format="reference"/>
         <attr name="lsStateTextColor" format="reference"/>
         <attr name="lsStateTextSize" format="reference"/>
+        <attr name="lsLoadingView" format="reference"/>
+        <attr name="lsEmptyView" format="reference"/>
+        <attr name="lsErrorView" format="reference"/>
     </declare-styleable>
     
     <declare-styleable name="LoadingStateTheme">
