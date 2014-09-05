@@ -3,7 +3,7 @@
     
     <!-- Default Loading state theme -->
     <style name="LoadingStateTheme">
-        <item name="lsStateBackgroud">@drawable/ls__bg_state_view</item>
+        <item name="lsStateBackground">@drawable/ls__bg_state_view</item>
     </style> 
     
     
