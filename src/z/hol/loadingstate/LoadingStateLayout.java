@@ -61,18 +61,21 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         super(context, attrs, defStyle);
         // TODO Auto-generated constructor stub
         init(context, attrs, defStyle);
+        removeAllStateViews();
     }
 
     public LoadingStateLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         // TODO Auto-generated constructor stub
         init(context, attrs, R.attr.loadingStateStyle);
+        removeAllStateViews();
     }
 
     public LoadingStateLayout(Context context) {
         super(context);
         // TODO Auto-generated constructor stub
         init(context, null, R.attr.loadingStateStyle);
+        removeAllStateViews();
     }
 
     protected abstract void init(Context context, AttributeSet attrs, int defStyle);
@@ -86,7 +89,12 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
     }
-    
+
+    /**
+     * Set reloading listener.
+     * the listener for Empty or Error click
+     * @param listener
+     */
     public void setReloadingListener(ReloadingListener listener){
         mReloadingListener = listener;
     }
@@ -248,7 +256,11 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         }
         return false;
     }
-    
+
+    /**
+     * Remove all state views.
+     * Only data view be remained.
+     */
     private void removeAllStateViews(){
         removeOldView(mEmptyView);
         removeOldView(mErrorView);
