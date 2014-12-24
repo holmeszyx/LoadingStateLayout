@@ -77,9 +77,9 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
             a.recycle();
         }
 
-        View loading = inflater.inflate(loadingViewRes, null);
-        View empty = inflater.inflate(emptyViewRes, null);
-        View error = inflater.inflate(errorViewRes, null);
+        View loading = inflater.inflate(loadingViewRes, this, false);
+        View empty = inflater.inflate(emptyViewRes, this, false);
+        View error = inflater.inflate(errorViewRes, this, false);
 
         setDataView(data);
         setLoadingView(loading);
@@ -123,7 +123,13 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
             setErrorText(mErrorText);
         }
     }
-    
+
+    /**
+     * instantiate data view
+     * @param inflater
+     * @param attrs
+     * @return
+     */
     protected T initDataView(LayoutInflater inflater, AttributeSet attrs){
         return null;
     }

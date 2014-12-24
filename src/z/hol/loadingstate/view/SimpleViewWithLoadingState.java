@@ -52,7 +52,7 @@ public class SimpleViewWithLoadingState extends BaseLoadingStateLayout<View>{
         }
         View dataview = null;
         if (dataViewRes != 0){
-            dataview = inflater.inflate(dataViewRes, null);
+            dataview = inflater.inflate(dataViewRes, this, false);
         }
         return dataview;
     }
