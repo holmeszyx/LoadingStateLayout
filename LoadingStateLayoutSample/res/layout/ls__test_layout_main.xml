@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="hello_hello" />
     
     <z.hol.loadingstate.view.ListViewWithLoadingState android:id="@android:id/list"
         android:layout_width="match_parent"
