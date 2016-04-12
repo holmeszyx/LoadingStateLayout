@@ -15,11 +15,7 @@ import android.widget.RelativeLayout;
  * @param <T>
  */
 public abstract class LoadingStateLayout <T extends View> extends RelativeLayout{
-    public static final int ID_DATA = 0x7f1989;
-    public static final int ID_EMPTY = 0x7f1990;
-    public static final int ID_ERROR = 0x7f1991;
-    public static final int ID_LOADING = 0x7f1992;
-    
+
     /**
      * State
      * @author holmes
@@ -45,12 +41,11 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         
         @Override
         public void onClick(View v) {
-            // TODO Auto-generated method stub
             if (mReloadingListener != null) {
                 int id = v.getId();
-                if (id == ID_EMPTY) {
+                if (id == R.id.ls__empty) {
                     mReloadingListener.onEmptyReloading();
-                } else if (id == ID_ERROR) {
+                } else if (id == R.id.ls__error) {
                     mReloadingListener.onErrorReloading();
                 }
             }
@@ -59,21 +54,18 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     
     public LoadingStateLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        // TODO Auto-generated constructor stub
         init(context, attrs, defStyle);
         removeAllStateViews();
     }
 
     public LoadingStateLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
         init(context, attrs, R.attr.loadingStateStyle);
         removeAllStateViews();
     }
 
     public LoadingStateLayout(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         init(context, null, R.attr.loadingStateStyle);
         removeAllStateViews();
     }
@@ -82,7 +74,6 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // TODO Auto-generated method stub
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (mRelayout){
             mRelayout = false;
@@ -133,7 +124,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mDataView = dataView;
         if (mDataView != null){
             mRelayout = true;
-            mDataView.setId(ID_DATA);
+            mDataView.setId(R.id.ls__data);
             if (oldVisibility != -1){
                 dataView.setVisibility(oldVisibility);
             }
@@ -158,8 +149,8 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mLoadingView = v;
         if (mLoadingView != null){
             mRelayout = true;
-            mLoadingView.setId(ID_LOADING);
-            setViewLayoutParams(mLoadingView, ID_LOADING);
+            mLoadingView.setId(R.id.ls__loading);
+            setViewLayoutParams(mLoadingView, R.id.ls__loading);
         }
     }
     
@@ -180,8 +171,8 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mErrorView = v;
         if (mErrorView != null){
             mRelayout = true;
-            mErrorView.setId(ID_ERROR);
-            setViewLayoutParams(mErrorView, ID_ERROR);
+            mErrorView.setId(R.id.ls__error);
+            setViewLayoutParams(mErrorView, R.id.ls__error);
         }
     }
     
@@ -202,8 +193,8 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
         mEmptyView = v;
         if (mEmptyView != null){
             mRelayout = true;
-            mEmptyView.setId(ID_EMPTY);
-            setViewLayoutParams(mEmptyView, ID_EMPTY);
+            mEmptyView.setId(R.id.ls__empty);
+            setViewLayoutParams(mEmptyView, R.id.ls__empty);
         }
     }
     
@@ -247,7 +238,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
                 params.addRule(CENTER_IN_PARENT, TRUE);
             }
             addView(v, params);
-            if (id != ID_LOADING){
+            if (id != R.id.ls__loading){
                 v.setFocusable(true);
                 v.setClickable(true);
                 v.setOnClickListener(mStateViewClickListener);
@@ -273,7 +264,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public void startLoading(){
         setState(State.LOADING);
         removeAllStateViews();
-        setViewLayoutParams(mLoadingView, ID_LOADING);
+        setViewLayoutParams(mLoadingView, R.id.ls__loading);
         invokeOnStateChanged(State.LOADING);
     }
     
@@ -295,7 +286,7 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     public void error(){
         setState(State.ERROR);
         removeAllStateViews();
-        setViewLayoutParams(mErrorView, ID_ERROR);
+        setViewLayoutParams(mErrorView, R.id.ls__error);
         invokeOnStateChanged(State.ERROR);
     }
     
@@ -310,12 +301,12 @@ public abstract class LoadingStateLayout <T extends View> extends RelativeLayout
     
     /**
      * Show empty state view.
-     * @see  {@link #hideEmpty()}
+     * @see #hideEmpty()
      */
     public void empty(){
         setState(State.EMPTY);
         removeAllStateViews();
-        setViewLayoutParams(mEmptyView, ID_EMPTY);
+        setViewLayoutParams(mEmptyView, R.id.ls__empty);
         mEmptyView.requestFocus();
         invokeOnStateChanged(State.EMPTY);
     }

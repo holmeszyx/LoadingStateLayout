@@ -54,7 +54,7 @@ public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingSta
             TypedArray a = getResources().obtainAttributes(attrs, R.styleable.LoadingState);
             int dataViewRes = 0;
             try{
-                dataViewRes = a.getResourceId(R.styleable.LoadingState_DataView, 0);
+                dataViewRes = a.getResourceId(R.styleable.LoadingState_lsDataView, 0);
             }finally{
                 a.recycle();
             }
@@ -89,10 +89,10 @@ public class SimpleAdapterViewWithLoadingState extends AdapterViewWithLoadingSta
                 if (cv == null) continue;
                 //System.out.println("tag is " + cv.getTag());
                 int id = cv.getId();
-                if (id == ID_DATA||
-                        id == ID_EMPTY ||
-                        id == ID_ERROR ||
-                        id == ID_LOADING){
+                if (id == R.id.ls__data||
+                        id == R.id.ls__empty ||
+                        id == R.id.ls__error ||
+                        id == R.id.ls__loading){
                     continue;
                 }else{
                     removeView(cv);

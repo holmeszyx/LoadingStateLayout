@@ -12,9 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
+ * <p>
  * A simple full loading state layout.
  * There are empty view, loading view and error view in it.
  * You can change state text or icon runtime, also can set it in XML
+ * </p>
  * @author holmes
  *
  * @param <T>
@@ -32,22 +34,18 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
     public BaseLoadingStateLayout(Context context, AttributeSet attrs,
             int defStyle) {
         super(context, attrs, defStyle);
-        // TODO Auto-generated constructor stub
     }
 
     public BaseLoadingStateLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
     }
 
     public BaseLoadingStateLayout(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     protected void init(Context context, AttributeSet attrs, int defStyle) {
-        // TODO Auto-generated method stub
         LayoutInflater inflater = LayoutInflater.from(context);
         T data = initDataView(inflater, attrs);
 
@@ -64,11 +62,11 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
             emptyViewRes = a.getResourceId(R.styleable.LoadingState_lsEmptyView, R.layout.ls__inc_empty);
             errorViewRes = a.getResourceId(R.styleable.LoadingState_lsErrorView, R.layout.ls__inc_error);
 
-            emptyIcon = a.getResourceId(R.styleable.LoadingState_EmptyIcon, 0);
-            errorIcon = a.getResourceId(R.styleable.LoadingState_ErrorIcon, 0);
-            mEmptyText = a.getText(R.styleable.LoadingState_EmptyText);
-            mErrorText = a.getText(R.styleable.LoadingState_ErrorText);
-            progressCycleIcon = a.getResourceId(R.styleable.LoadingState_LoadingProgress, 0);
+            emptyIcon = a.getResourceId(R.styleable.LoadingState_lsEmptyIcon, 0);
+            errorIcon = a.getResourceId(R.styleable.LoadingState_lsErrorIcon, 0);
+            mEmptyText = a.getText(R.styleable.LoadingState_lsEmptyText);
+            mErrorText = a.getText(R.styleable.LoadingState_lsErrorText);
+            progressCycleIcon = a.getResourceId(R.styleable.LoadingState_lsProgress, 0);
             stateBackground = a.getResourceId(R.styleable.LoadingState_lsStateBackground, 0);
             stateTextColor = a.getColorStateList(R.styleable.LoadingState_lsStateTextColor);
             // loadingProgressDuration = a.getInt(R.styleable.LoadingState_LoadingProgressDuration, -1);
@@ -136,14 +134,12 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
     
     @Override
     public void setLoadingView(View v) {
-        // TODO Auto-generated method stub
         super.setLoadingView(v);
         mLoadingTextView = (TextView) v.findViewById(android.R.id.text1);
     }
 
     @Override
     public void setErrorView(View v) {
-        // TODO Auto-generated method stub
         super.setErrorView(v);
         mErrorTextView = (TextView) v.findViewById(android.R.id.text1);
         mErrorImageView = (ImageView) v.findViewById(android.R.id.icon);
@@ -151,7 +147,6 @@ public class BaseLoadingStateLayout <T extends View>extends LoadingStateLayout<T
 
     @Override
     public void setEmptyView(View v) {
-        // TODO Auto-generated method stub
         super.setEmptyView(v);
         mEmptyTextView = (TextView) v.findViewById(android.R.id.text1);
         mEmptyImageView = (ImageView) v.findViewById(android.R.id.icon);

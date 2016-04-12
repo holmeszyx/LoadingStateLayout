@@ -24,17 +24,14 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
     public AdapterViewWithLoadingState(Context context, AttributeSet attrs,
             int defStyle) {
         super(context, attrs, defStyle);
-        // TODO Auto-generated constructor stub
     }
 
     public AdapterViewWithLoadingState(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
     }
 
     public AdapterViewWithLoadingState(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
     }
     
     public void setAdapter(ListAdapter adapter){
@@ -76,7 +73,6 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
 
         @Override
         public void onChanged() {
-            // TODO Auto-generated method stub
             super.onChanged();
             if (mAdapter == null || mAdapter.isEmpty()){
                 empty();
@@ -87,7 +83,6 @@ public class AdapterViewWithLoadingState <T extends AbsListView> extends BaseLoa
 
         @Override
         public void onInvalidated() {
-            // TODO Auto-generated method stub
             super.onInvalidated();
             if (mAdapter == null || mAdapter.isEmpty()){
                 empty();

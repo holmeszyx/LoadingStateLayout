@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <item name="ls__data" type="id"/>
+    <item name="ls__empty" type="id"/>
+    <item name="ls__error" type="id"/>
+    <item name="ls__loading" type="id"/>
+
+</resources>

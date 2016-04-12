@@ -30,3 +30,4 @@ proguard/
 .gradle/
 .settings/
 build/
+publish.gradle
