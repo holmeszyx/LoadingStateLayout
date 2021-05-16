@@ -1,30 +1,33 @@
-
 apply plugin: 'com.android.library'
 
-android{
-	compileSdkVersion 23
-	buildToolsVersion '23.0.2'
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
 
-	defaultConfig{
-		minSdkVersion 9
-		targetSdkVersion 22
-		versionCode 1
-		versionName '1.0.2'
-	}
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName '1.0.2'
+    }
 
-	buildTypes{
-		debug{
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-		}
-	}
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
 }
 
-dependencies{
+dependencies {
 }
 
-def pubfile = new File('publish.gradle')
-if (pubfile.exists()) {
-	apply from : 'publish.gradle'
+ext {
+    snapshot = false
+    mvn_groupId = "xyz.imzyx.open"
+    mvn_artifactId = "loadingstate"
+    mvn_version = "1.0.3"
 }
+
+apply from: '../maven_pub.gradle'

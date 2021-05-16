@@ -1,0 +1,154 @@
+// publish
+
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+/*
+ 
+1. module里面，apply这个
+apply from: "../maven_pub.gradle"
+ 
+2. 定义一些maven环境
+ext {
+    mvn_groupId = "com.aa.bb"
+    mvn_artifactId = "lib"
+    mvn_version = "1.0.0" // "1.0.0-SNAPSHOT"
+}
+ 
+ 
+*/
+
+ext {
+
+    mvnValidateKeys = [
+            'mvn_groupId',
+            'mvn_artifactId',
+            'mvn_version'
+    ]
+
+}
+
+boolean validateMvnEnv(project) {
+    if (project == null) {
+        return false
+    }
+    for (mvnKey in mvnValidateKeys) {
+        if (!project.hasProperty(mvnKey) && project.property(mvnKey) != "") {
+            project.
+                    return false
+        }
+    }
+    return true
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.source
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            owner.classpath += variant.javaCompile.classpath
+        }
+    }
+    exclude '**/R.html', '**/R.*.html', '**/index.html'
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    if (android.sourceSets != null) {
+        from android.sourceSets.main.java.srcDirs
+    } else {
+        from sourceSets.main.java.srcDirs
+    }
+}
+
+afterEvaluate {
+
+    if (!validateMvnEnv(project)) {
+        println("not a maven project: ${project.name}")
+        return
+    }
+
+    def mvn_groupId = project.mvn_groupId
+    def mvn_artifactId = project.mvn_artifactId
+    def mvn_version = project.mvn_version
+
+    def useSnap = false
+    if (project.snapshot) {
+        mvn_version = mvn_version + "-SNAPSHOT"
+        useSnap = true
+    }
+
+    println("This is maven module:")
+    println("poms (group: ${mvn_groupId}, artifact: ${mvn_artifactId}, ver: ${mvn_version})")
+
+    publishing {
+        repositories {
+            maven {
+                def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                url = useSnap ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username = OSSRH_USER
+                    password = OSSRH_PASSWORD
+                }
+            }
+        }
+
+        publications {
+
+            if (android.sourceSets != null) {
+                release(MavenPublication) {
+                    from components.release
+
+                    artifact androidJavadocsJar
+                    artifact androidSourcesJar
+
+                    groupId = mvn_groupId
+                    artifactId = mvn_artifactId
+                    version = mvn_version
+
+                    pom {
+                        name = 'Loading state'
+                        description = 'A view embed loading, error, empty states'
+                        url = 'https://github.com/holmeszyx/LoadingStateLayout'
+
+                        licenses {
+                            license {
+                                name = 'The Apache License, Version 2.0'
+                                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+                        developers {
+                            developer {
+                                id = 'holmeszyx'
+                                name = 'holmszyx'
+                                email = 'holmeszyx@gmail.com'
+                            }
+                        }
+                        scm {
+                            connection = 'scm:git:git://git@github.com:holmeszyx/LoadingStateLayout.git'
+                            developerConnection = 'scm:git:git://git@github.com:holmeszyx/LoadingStateLayout.git'
+                            url = 'https://github.com/holmeszyx/LoadingStateLayout'
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+
+    signing {
+        sign publishing.publications.release
+    }
+
+
+}
